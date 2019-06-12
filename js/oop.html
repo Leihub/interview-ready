@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象</title>
+</head>
+<body>
+    <script>
+    // 类的声明和实例化
+    function Person(name){
+        this.name = name
+        this.walk = [1,2,3]
+        this.age = 12
+    }
+    class Person2{
+        constructor(name){
+            this.name = name
+        }
+    }
+    console.log('p',new Person('lei'),new Person2('lei2'));
+    // 类的继承
+    // 1. 构造函数继承
+    function Child(){
+        Person.call(this)
+    }
+    Person.prototype.sex = 'nv'
+    var p = new Child
+    console.log(p.sex); //undefined 无法继承原型链的上属性
+    // 2. 原型链继承
+    function Child2(){
+       this.age = 23
+    }
+    Child2.prototype = new Person()
+    var p2 = new Child2()
+    p2.walk.push('lei')
+    var p3 = new Child2()
+    /**
+     * 组合继承版本一，解决原型链继承的引用属性会被改变，解决构造函数继承无法继承原型链上的属性
+     * 缺点：多次执行父类的构造函数
+    */
+   function Parent3(){
+       this.name = 'parent3'
+       this.arr = [1,2]
+   }
+   function Child3(){
+       Parent3.call(this)
+        this.type = 'child3'
+   }
+   Child3.prototype = new Parent3()
+   var c3 = new Child3()
+   var c4 = new Child3()
+   c3.arr.push(3)
+   /**
+     * 组合继承版本二，解决原型链继承的引用属性会被改变，解决构造函数继承无法继承原型链上的属性
+     * 缺点：无法区分对象是子类的实例
+    */
+    function Parent4(){
+       this.name = 'parent4'
+       this.arr = [1,2]
+   }
+   function Child4(){
+       Parent4.call(this)
+        this.type = 'child4'
+   }
+   Child4.prototype = Parent4.prototype
+   var c5 = new Child4()
+   var c6 = new Child4()
+   console.log('c5',c5 instanceof Child4,c6 instanceof Parent4);
+   console.log('c6', c6.__proto__.constructor === Child4); //false
+   
+   /**
+     * 组合继承版本三，解决原型链继承的引用属性会被改变，解决构造函数继承无法继承原型链上的属性
+    */
+    function Parent5(){
+       this.name = 'parent5'
+       this.arr = [1,2]
+    }
+    function Child5(){
+        Parent5.call(this)
+        this.type = 'child5'
+    }
+     Child5.prototype = Object.create(Parent5.prototype) //隔离子类的prototype 和父类的prototype
+     Child5.prototype.constructor = Child5 // 指定子类的构造函数
+     var c7 = new Child5()
+     var c8 = new Child5()
+
+    </script>
+</body>
+</html>

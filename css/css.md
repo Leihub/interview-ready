@@ -6,6 +6,15 @@
 box-sizing:border-box;// IE 盒模型
 box-sizing:content-box;// 标准盒模型（默认）
 
+js 如何设置获取盒模型对应的宽和高：
+通过dom的样式获取只能取出内联样式的宽高（dom.style.width）
+通过dom的样式获取，dom.currentStyle.width ie浏览器，window.getComputedStyle(dom).width chorme,firefox
+dom.getBoundingClientRect().width
+
+根据盒模型边距重叠（margin 塌陷）:
+父子元素边距重叠，相邻元素边距重叠，取最大值。
+bfc 和 ifc
+
 ### 如何垂直居中？
 1.定高元素使用line-height：高度
 2.flex 【align-items:center;】
@@ -32,7 +41,7 @@ flex flex-basis flex-grow flex-shrink 的简写 浏览器会自动匹配各项�
 ### BFC 是什么
 block formatting context 块级格式上下文 是块级元素的渲染区域，规定内部的块级元素的布局方式，与外部隔离。<br/>
 
-BFC 的布局规则：<br/>
+BFC 的布局规则（原理）：<br/>
 内部块级元素垂直往下排列<br/>
 内部的块级元素垂直方向的距离由magrin 决定，同一个BFC的相邻box 垂直方向的margin 会发生塌陷<br/>
 bfc的区域不会跟float 元素发生重叠 <br/>
@@ -64,4 +73,9 @@ BFC常用用途：
 4. 给定父元素高度 
 
 ### CSS 选择器优先级
+
+### sass，less 
+
+两者都是css 预编译器，最后编译成css
+sass 变量前缀是@ ，less 变量前缀是$ 支持嵌套写法，函数 mixin 等强大功能，能在工作中提高工作效率。
 

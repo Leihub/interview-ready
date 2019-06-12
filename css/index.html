@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上下高度固定，中间自适应布局</title>
+    <style>
+        html,*{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- <section>
+        <style>
+            .absolute-wrapper{
+            }
+            .absolute-wrapper .top{
+                height: 100px;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                background: red;
+            }
+            .absolute-wrapper .bottom{
+                height: 100px;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                background: blue;
+            }
+            .absolute-wrapper .center{
+                position: absolute;
+                top: 100px;
+                bottom: 100px;
+                width: 100%;
+                background: yellow
+            }
+        </style>
+        <article class="absolute-wrapper">
+            <div class="top"></div>
+            <div class="bottom"></div>
+            <div class="center">
+                我是绝对定位布局
+                <p>1.我是上下三栏布局</p>
+                <p>1.我是上下三栏布局</p>
+            </div>
+        </article>
+    </section> -->
+    <!-- <section>
+        <style>
+            html,body,section{
+                height: 100%;
+            }
+            .flex-wrapper{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .flex-wrapper .top{
+                height: 100px;
+                width: 100%;
+                background: red;
+            }
+            .flex-wrapper .bottom{
+                height: 100px;
+                width: 100%;
+                background: blue;
+            }
+            .flex-wrapper .center{
+                flex: 1;
+                background: yellow;
+            }
+        </style>
+        <article class="flex-wrapper">
+            <div class="top"></div>
+            <div class="center">
+                    我是flex定位
+                    <p>1.我是上下三栏布局</p>
+                    <p>1.我是上下三栏布局</p>
+            </div>
+            <div class="bottom"></div>
+        </article>
+    </section> -->
+    <section>
+        <style>
+            html,body,section{
+                height: 100%;
+            }
+            .table-wrapper{
+                height: 100%;
+                width: 100%;
+                display: table;
+            }
+            .table-wrapper > div{
+                display: table-row;
+                width: 100%;
+            }
+            .table-wrapper .top{
+                height: 100px;
+                background: red;
+            }
+            .table-wrapper .bottom{
+                height: 100px;
+                background: blue;
+            }
+            .table-wrapper .center{
+                background: yellow;
+            }
+        </style>
+        <article class="table-wrapper">
+            <div class="top"></div>
+            <div class="center">
+                    我是flex定位
+                    <p>1.我是上下三栏布局</p>
+                    <p>1.我是上下三栏布局</p>
+            </div>
+            <div class="bottom"></div>
+        </article>
+    </section>
+</body>
+</html>
