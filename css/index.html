@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三栏布局</title>
+    <style>
+        html,*{
+            margin: 0;
+            padding: 0;
+        }
+        section article>div{
+            min-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <style>
+            .float-wrapper .left{
+                float: left;
+                width: 300px;
+                background: red
+            }
+            .float-wrapper .center{
+                min-height: 150px;
+                background: yellow
+            }
+            .float-wrapper .right{
+                float: right;
+                width: 300px;
+                background: blue
+            }
+            
+        </style>
+        <article class="float-wrapper">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                这是浮动解决方案
+                1.这是三栏布局
+                1.这是三栏布局
+            </div>
+        </article>
+    </section>
+    <!-- <section>
+        <style>
+            .postion-wrapper{
+                position: relative;
+                margin-top: 50px;
+            }
+            .postion-wrapper .left{
+                position: absolute;
+                left: 0;
+                width: 300px;
+                background: red
+            }
+            .postion-wrapper .center{
+                position: absolute;
+                left: 300px;
+                right: 300px;
+                background: yellow
+            }
+            .postion-wrapper .right{
+                position: absolute;
+                right: 0;
+                width: 300px;
+                background: blue
+            }
+            
+        </style>
+        <article class="postion-wrapper">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                这是绝对定位解决方案
+                1.这是三栏布局
+                1.这是三栏布局
+            </div>
+        </article>
+    </section> -->
+    <section>
+        <style>
+            .postion-wrapper{
+                display: flex;
+                margin-top: 50px;
+            }
+            .postion-wrapper .left{
+                width: 300px;
+                background: red
+            }
+            .postion-wrapper .center{
+                flex: 1;
+                background: yellow
+            }
+            .postion-wrapper .right{
+                width: 300px;
+                background: blue
+            }
+            
+        </style>
+        <article class="postion-wrapper">
+            <div class="left"></div>
+            <div class="center">
+                这是flex 解决方案
+                1.这是三栏布局
+                1.这是三栏布局
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+
+    <section>
+        <style>
+            .table-wrapper{
+                display: table;
+                width: 100%;
+                min-height: 150px;
+                margin-top: 50px;
+            }
+            .table-wrapper .left{
+                display: table-cell;
+                width: 300px;
+                background: red
+            }
+            .table-wrapper .center{
+                display: table-cell;
+                background: yellow
+            }
+            .table-wrapper .right{
+                display: table-cell;
+                width: 300px;
+                background: blue
+            }
+            
+        </style>
+        <article class="table-wrapper">
+            <div class="left"></div>
+            <div class="center">
+                这是table布局
+                1.这是三栏布局
+                1.这是三栏布局
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+
+    <section>
+        <style>
+            .grid-wrapper{
+                display: grid;
+                grid-template-columns: 300px auto 300px;
+                grid-template-rows: 150px;
+                margin-top: 50px;
+            }
+            .grid-wrapper .left{
+                background: red
+            }
+            .grid-wrapper .center{
+                background: yellow
+            }
+            .grid-wrapper .right{
+                background: blue
+            }
+            
+        </style>
+        <article class="grid-wrapper">
+            <div class="left"></div>
+            <div class="center">
+                这是gird 布局
+                1.这是三栏布局
+                1.这是三栏布局
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+</body>
+</html>
