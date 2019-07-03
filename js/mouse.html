@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+    <script>
+    window.onload = function(){
+        var windowW = window.innerWidth,
+            windowH = window.innerHeight
+        var div = document.getElementById('div')
+        div.onmousedown = function(event){
+            event = event || window.event
+            var distanceX = event.clientX - this.offsetLeft,
+                distanceY = event.clientY - this.offsetTop
+                
+            document.onmousemove = function(event2){
+                event2 = event2 || window.event
+                var left = event2.clientX - distanceX,
+                    top = event2.clientY - distanceY
+                    
+                if(left < 0) left = 0 //左边缘
+                if(top < 0) top = 0 //上边缘
+                if(left > windowW - div.offsetWidth) left = windowW - div.offsetWidth // 右边缘
+                if(top > windowH - div.offsetHeight) top = windowH - div.offsetHeight //下边缘
+                
+                div.style.left = left + 'px'
+                div.style.top = top + 'px'
+            }
+
+            document.onmouseup = function(){
+                document.onmousemove = null
+                document.onmouseup = null
+            }
+        }
+    }
+    </script>
+</body>
+</html>

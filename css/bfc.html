@@ -6,24 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>bfc</title>
     <style>
-            .par {
-                border: 5px solid #fcc;
-                width: 300px;
-            }
-         
-            .child {
-                border: 5px solid #f66;
-                width:100px;
-                height: 100px;
-                float: left;
+            html,*{
+                padding: 0;
+                margin: 0;
             }
         </style>
         </head>
 
         <body>
-            <div class="par">
-                <div class="child"></div>
-                <div class="child2">阿达d</div>
-            </div>
-        </body>
-</html>
+            <!-- bfc解决边距重叠问题 -->
+            <section>
+                <style>
+                    .father{background: red;overflow: hidden;}
+                    .child{margin-top: 20px;height: 100px;background: blue}
+                </style>
+                <div class="father">
+                    <div class="child">我是child</div>
+                </div>
+            </section>
+            <!-- float 区域不会与bfc元素重叠 -->
+            <section>
+                <style>
+                    .float{float: left;width: 100px;height: 100px;background: red;}
+                    .right{background: blue;height: 120px;overflow: auto;}
+                </style>
+                <div class="float">我是float 元素</div>
+                <div class="right">我是右边</div>
+            </section>
+            <!-- bfc 中float也参与高度计算 -->
+            <section>
+                <style>
+                    .float-wrapper{background: blue;float: left;}
+                    .float{float: left;height: 100px;background: red}
+                </style>
+                <div class="float-wrapper">
+                    <div class="float">我是浮动元素</div>
+                </div>
+            </section>
+        </body></html>
