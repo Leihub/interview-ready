@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    //    var b
+    //    void function(){
+    //        var env = {b:1}
+    //         b=1
+    //         console.log(`in function b`, b)
+    //         with(env){
+    //             var b = 1
+    //             console.log(`in with b`,b)
+    //         }
+    //    }();
+    //    console.log(`in with global`,b)
+    //    let a =1
+    // var a = 1;
+    // fn()
+    // console.log(a)
+    // function fn(){
+    //     console.log(a)
+    //     var a = 2
+    //     console.log(a)
+    // }
+    // var a = 1
+    // if(true){
+    //     let a = 2
+    //     console.log(a)
+    // }
+
+    // var iframe = document.createElement('iframe')
+    // document.documentElement.appendChild(iframe)
+    // iframe.src = "javascript:var b={};"
+    // var b2 = {}
+    // setTimeout(()=>{
+    //     var b1 = iframe.contentWindow.b
+    //     console.log(typeof b1,typeof b2)
+    //     console.log(b1 instanceof Object,b2 instanceof Object)
+    // },500)
+
+    // function showThis(){
+    //     console.log(this)
+    // }
+    // var o ={
+    //     showThis:showThis
+    // }
+    // showThis()
+    // o.showThis()
+
+    var log = console.log.bind(console)
+    // var a = 1
+    // foo()
+
+    // var b = 2
+    // function foo(){
+    //     console.log(b)
+    //     console.log(a)
+    // }
+
+    var o = {}
+    o.foo = function foo(){
+        log(this)
+        return () => {
+            log(this)
+            return () => {
+                log(this)
+            }
+        }
+    }
+    foo()
+    o.foo()
+    </script> 
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var o = {
+            toString:function(){console.log('tostring');return {}},
+            valueOf:function(){console.log('valueof');return {}}
+        }    
+        // console.log(o+'')
+
+        var cat = {
+            say:function(){
+                console.log('miaomiao')
+            },
+            jump:function(){
+                console.log('jump')
+            }
+        }
+
+        var tiger = Object.create(cat,{
+            say:{
+                value:function(){
+                    console.log('tiger')
+                },
+                enumberable:true,
+                configurable:true,
+                writeable:true
+            }
+        })
+        var tiger2 = Object.create(null,{
+            say:{
+                value:function(){
+                    console.log('no')
+                },
+                enumberable:true,
+                configurable:true,
+                writeable:true
+            }
+        })
+        
+
+        console.log(tiger.__proto__)
+        tiger.say()
+        tiger2.say()
+    </script>
+</body>
+</html>
