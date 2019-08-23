@@ -9,8 +9,23 @@
     <script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script>
 </head>
 <body>
-    <input type="text">
-    <button>submit</button>
-    <ul></ul>
+    <div id="app"></div>
+    <script>
+    // function App(){
+    //     return(
+    //         <div>
+    //             <input type="text" />
+    //             <button>submit</button>
+    //             <ul></ul>    
+    //         </div>
+    //     )
+    // }
+    const element = (
+        <div>
+            hello world 
+        </div>
+    )
+    ReactDOM.render(element, document.getElementById('root'))
+    </script>
 </body>
 </html>

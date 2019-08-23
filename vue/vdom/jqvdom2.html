@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.js"></script>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <div class="btn">click</div>
+    <script>
+        var snabbdom = window.snabbdom
+        var patch = snabbdom.init([
+            snabbdom_class,
+            snabbdom_props,
+            snabbdom_style,
+            snabbdom_eventlisteners
+        ])
+
+        var h = snabbdom.h
+        var array = [
+            {
+                name:'张三',
+                age:20,
+                address:'北京'
+            },
+            {
+                name:'李四',
+                age:20,
+                address:'北京'
+            },{
+                name:'王五',
+                age:20,
+                address:'北京'
+            },
+        ]
+        var container = document.querySelector('.container')
+        var btn = document.querySelector('.btn')
+
+        var vnode 
+
+        function render(){
+            var newVnode = h('table',{},array.map((item)=>{
+                var tds = []
+                var i
+                for(i in item){
+                    if(item.hasOwnProperty(i)){
+                        tds.push(h('td',{},item[i]))
+                    }
+                }
+                return h('tr',{},tds)
+            }))
+
+            if(vnode){
+                patch(vnode,newVnode)
+            }else{
+                patch(container,newVnode) // 初次渲染
+            }
+
+            vnode = newVnode
+        }
+        btn.addEventListener('click',()=>{
+            array[0].age =89
+            array[1].address = 'shanghai'
+            render()
+        })
+        render()
+
+    </script>
+</body>
+</html>

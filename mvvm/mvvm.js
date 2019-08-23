@@ -9,7 +9,7 @@ class MVVM{
         }
     }
 
-    proxyData(data){
+    proxyData(data){ // 代理data 属性
         Object.keys(data).forEach(key => {
             Object.defineProperty(this,key,{
                 get:function(){

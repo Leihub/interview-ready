@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
+    <script src="vue-2.5.13.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="item">
+        <button @click="handleClick">submit</button>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+    let vm = new Vue({
+        el:'#app',
+        data() {
+            return {
+                list:[],
+                item:''
+            }
+        },
+        methods: {
+            handleClick(){
+                if(this.item){
+                    this.list.push(this.item)
+                }
+            }
+        },
+    })
+
+
+    /* 
+        with(this) {
+            return _c('div', {
+                attrs: {
+                    "id": "app"
+                }
+            }, [_c('input', {
+                directives: [{
+                    name: "model",
+                    rawName: "v-model",
+                    value: (item),
+                    expression: "item"
+                }],
+                attrs: {
+                    "type": "text"
+                },
+                domProps: {
+                    "value": (item)
+                },
+                on: {
+                    "input": function ($event) {
+                        if ($event.target.composing) return;
+                        item = $event.target.value
+                    }
+                }
+            }), _v(" "), _c('button', {
+                on: {
+                    "click": handleClick
+                }
+            }, [_v("submit")]), _v(" "), _c('ul', _l((list), function (item) {
+                return _c('li', [_v(_s(item))])
+            }))])
+        }
+    */
+
+    </script>
+    
+</body>
+</html>
