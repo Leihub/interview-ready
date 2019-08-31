@@ -1,3 +1,6 @@
+var testObject = require('./test')
+
+console.log(testObject)
 // 语法糖
 class MathHandle{
     constructor(x,y){

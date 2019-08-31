@@ -34,7 +34,7 @@ ppk 把移动设备上有3个viewport layout viewport、visual viewport、ideal 
 2. visual viewport： viewport 宽度等于可视区域宽度
 3. ideal viewport：等于设备宽度
 
-meta 设置viewport ，默认情况是layout viewport 需要设置为meat viewport 的width = device-width
+meta 设置viewport ，默认情况是layout viewport 需要设置为meta viewport 的width = device-width
 viewport content 属性值：
 1. width:viewport 宽度，一般移动设备为 device-width 也可以设置为正整数
 2. inital-scale：默认缩放比例，一般设为1.0 可为小数
@@ -49,3 +49,8 @@ ie 上设置inital-scale = 1 无论横屏还是竖屏都是竖屏的宽度
 为了兼容性最佳实践：
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+### HTML中attribute和property的区别是什么？
+attribute 是HTML标签上的某个属性,值只能是字符串。操作方法只有 getAttribute, setAttribute,removeAttribute相关方法.在节点自带属性例如id name value 等可以在property 里面访问到，自定义的attribute 在property 里面是访问不到的
+property 是js获取dom 对象上的属性，js对象的properties 可以里面可以有attributies。property 可以直接用对象的方式访问到属性，
+
+### inner HTML 会有什么问题，如何简单的方法避免插入文本的xss 攻击

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试defineproperty 和 proxy</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="输入你要模拟的值" id="inpt">
+        <p id="show"></p>
+    </div>
+    <script>
+        var a = {}
+        var bval = 1
+        Object.defineProperty(a,'b',{
+            set:function(newVal){
+                console.log('set')
+                bval = newVal
+            },
+            get:function(){
+                return bval
+            }
+        })    
+        console.log(a.b)
+        a.b = []
+        a.b = [1,2,3]
+        a.b[1] = 88
+        a.b.push(123)
+
+        var obj = {}
+        var handler = {
+            get(target,property){
+                console.log(`${target}${property}被挟持`)
+                return property in target ? target[property] : 3
+            },
+            set(target,property,value){
+                console.log(`${property} 被设置成 ${value}`)
+                target[property] = value
+            }
+        }
+        var p = new Proxy(obj,handler)
+        console.log(p.a)
+        p.b = [1,2]
+        p.b[0] = 9
+        console.log(p.b)
+
+        // 模拟双向数据绑定
+        var iobj = {}
+        var handler2 = {
+            get(target,property){
+                console.log(`${property}被挟持`)
+                return property in target ? target[property] : 3
+            },
+            set(target,property,value){
+                console.log(`${property} 被设置成 ${value}`)
+                if(property == 'text'){
+                    show.innerHTML = value
+                }
+                // target[property] = value
+            }
+        }
+        const piobj = new Proxy(iobj,handler2)
+        var show = document.getElementById('show')
+        var ipt = document.getElementById('inpt')
+        ipt.addEventListener('keyup',function(e){
+            piobj.text = e.target.value
+        })
+        // 数据挟持使 (a == 1 && a==2 &&a ==3) === true
+        var n = 0
+        Object.defineProperty(window,'abc',{
+            get(){
+                console.log('挟持')
+                return ++n
+            },
+            set(newVal){
+                value = newVal
+            }
+        })
+
+        var a = {
+            i:1,
+            toString:function(){
+                return a.i++
+            }
+        } // 解析 == 会进行数据类型转换，每次转换都会执行Object.toString 方法，挟持这个方法就可以。   
+        console.log(abc ==1 && abc==2 && abc==3)
+    </script>
+</body>
+</html>

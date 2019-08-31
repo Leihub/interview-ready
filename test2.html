@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>for...in  VS for ...of</title>
+</head>
+<body>
+    <script>
+    Object.prototype.objCustom = function(){}
+    Array.prototype.arrCustom = function(){}
+    let arr = [1,2,3]
+    arr.foo = 'hello'
+    console.log('我是for of',arr)
+    for(let i of arr){
+        console.log(i)
+    }
+    console.log('我是for in',arr);
+    for(let k in arr){
+        if(arr.hasOwnProperty(k)){
+            console.log(`我自己的${k}`)
+        }else{
+            console.log(`来自构造函数${k}`)
+        }
+    }
+    let obj = {name:'lei',age:15}
+    for(let k in obj){
+        console.log(`${k}:${obj[k]}`)
+    }
+    for(let i of obj){
+        console.log(i)
+    }
+
+    </script>
+</body>
+</html>

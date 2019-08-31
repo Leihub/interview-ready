@@ -9,7 +9,8 @@ box-sizing:content-box;// 标准盒模型（默认）
 js 如何设置获取盒模型对应的宽和高：
 通过dom的样式获取只能取出内联样式的宽高（dom.style.width）
 通过dom的样式获取，dom.currentStyle.width ie浏览器，window.getComputedStyle(dom).width chorme,firefox
-dom.getBoundingClientRect().width
+dom.getBoundingClientRect().width  获取的带有单位  
+dom.offsetWidth  获取的是纯数字
 
 根据盒模型边距重叠（margin 塌陷）:
 父子元素边距重叠，相邻元素边距重叠，取最大值。
@@ -77,5 +78,14 @@ BFC常用用途：
 ### sass，less 
 
 两者都是css 预编译器，最后编译成css
-sass 变量前缀是@ ，less 变量前缀是$ 支持嵌套写法，函数 mixin 等强大功能，能在工作中提高工作效率。
+sass 变量前缀是$ ，less 变量前缀是@。sass 函数调用使用@include，less 函数调用使用.。 支持嵌套写法，函数 mixin 等强大功能，能在工作中提高工作效率。
+
+
+### 为什么不推荐用style内联元素？内联元素有什么缺点？
+style 内联不利于维护和拓展，使用css 文件可以缓存在浏览器端，每次访问时候可以不用重新下载。
+
+### css 中的相对单位，分别是相对谁。
+1. em 其相对于当前对象内文本的font-size（如果当前对象内文本的font-size计量单位也是em，则当前对象内文本的font-size的参考对象为父元素文本font-size）。
+2. rem 相对于根元素html的font-size 
+3. vh,vw  相对于可视区域
 

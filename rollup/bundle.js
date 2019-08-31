@@ -25,6 +25,10 @@
     return Constructor;
   }
 
+  var testObject = require('./test');
+
+  console.log(testObject); // 语法糖
+
   var MathHandle =
   /*#__PURE__*/
   function () {
@@ -51,11 +55,13 @@
     this.y = y;
 
     this.walk = function () {
+      // 写在构造函数内部的方法每个实例都会拷贝这个方法，占用过多内存，当需要访问构造函数的内部私有属性的时候可以使用这种方法。
       console.log(this);
     };
   }
 
   MathHandle2.prototype.add = function () {
+    // 每个实例共享该方法，不会拷贝
     return this.x + this.y;
   };
 
