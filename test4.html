@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test 获取页面上所有元素的伪类元素</title>
+    <style>
+        .has::after{
+            content: '';
+            display:inline-block;
+            width: 10px;
+            height: 10px;
+            background: red;
+        }
+        .container::before{
+            content: 'asd';
+        }
+        /* .container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        } */
+        .text{background: blue;line-height: 240px;font-size: 0;}
+        .text span{background: #ffffff;font-size: 14px;line-height: 1;}
+        .text img{vertical-align: middle;}
+        .green{background: green;line-height: 30px;}
+        .dib-baseline {
+        display: inline-block; width: 150px; height: 150px;
+        border: 1px solid #cad5eb; background-color: #f0f3f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="has">我有伪类元素</div>
+        <div class="has">我有伪类元素</div>
+        <div class="has">我有伪类元素</div>
+    </div>
+    <ul>
+        <li><span>事件委托</span></li>
+        <li><span>事件委托</span></li>
+        <li><span>事件委托</span></li>
+        <li><span>事件委托</span></li>
+    </ul>
+    <div class="text">
+        <img src="https://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" alt="">
+        <span>测试vertical-align</span>
+    </div>
+    <div >
+        <span class="dib-baseline"></span>
+        <span class="dib-baseline">x-baseline</span>
+    </div>
+
+    <!-- <div class="text"><img src="https://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" alt=""></div> -->
+    <script>
+        var nodeList = document.getElementsByTagName('*')
+        var container = document.querySelector('.container')
+        console.log(nodeList)
+        console.log(getComputedStyle(container,':after').content)
+        var ret = [];
+        [].forEach.call(nodeList,function(item,i){
+            if(getComputedStyle(item,':after').content != 'none'){
+                ret.push(item)
+            }
+        })
+        console.log(ret)
+
+        var ul = document.querySelector('ul')
+        ul.addEventListener('click',function(e){
+            var target = e.target
+            console.log(target.nodeName)
+            if(target.nodeName === 'SPAN'){
+                target = target.parentNode
+            }
+            console.log(target)
+            // if(target.parentNode)
+        })
+    </script>
+</body>
+</html>
