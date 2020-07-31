@@ -37,7 +37,9 @@ align-content<br/>
 flex-basis 默认值是auto 如果设置为主轴方向的宽度或者高度 则为固定宽度或者高度<br/>
 flex-grow 缩大比例<br/>
 flex-shrink 放小比例<br/>
-flex flex-basis flex-grow flex-shrink 的简写 浏览器会自动匹配各项值<br/>
+flex flex-grow flex-shrink flex-basis的简写 浏览器会自动匹配各项值<br/>
+
+flex-basis 跟 width 同时存在的时候会忽略width属性
 
 ### BFC 是什么
 block formatting context 块级格式上下文 是块级元素的渲染区域，规定内部的块级元素的布局方式，与外部隔离。<br/>
