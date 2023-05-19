@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESModule</title>
+</head>
+<body>
+    <div>动态引入</div>
+    <button id="add">新增add.js</button>
+    <button id="math">引入math</button>
+    <script type="module">
+        let btn1 = document.getElementById('add')
+        btn1.addEventListener('click',async ()=>{
+            const add = await import('./add.js')
+            console.log('add',add);
+            console.log(add.default(20,10));
+        })
+
+        let btn2 = document.getElementById('math')
+        btn2.addEventListener('click',async ()=>{
+            const math = await import('./math.js')
+            console.log('math',math);
+            console.log(math.add(2,10));
+            console.log(math.mult(2,10));
+        })
+    </script>
+</body>
+</html>
