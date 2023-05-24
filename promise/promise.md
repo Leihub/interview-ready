@@ -81,3 +81,81 @@ Promise.race([requestImg(),timeout()]).then(data => {
 })
 
 ```
+
+#### 构建promise
+步骤一：实现成功和失败的回调方法
+```
+class Promise{
+    constructor(excutor){
+        this.status = 'pending'
+        this.value = undefined
+        this.reason = undefined
+
+        // 存放成功的回调
+        this.onResolvedCallbacks = []
+
+        // 存放失败的回调
+        this.onRejectedCallbacks = []
+
+        let resolve = (data) => {
+            if(this.status === 'pending'){
+                this.value = data
+                this.status = 'resolved'
+                this.onResolvedCallbacks.forEach(fn => fn())
+            }
+        }
+
+        let reject = (reason) => {
+            if(this.status === 'pending'){
+                this.reason = reason
+                this.status = 'rejected'
+                this.onRejectedCallbacks.forEach(fn => fn())
+            }
+        }
+
+
+        try{
+            excutor(resolve,reject)
+        }catch{
+            reject(e)
+        }
+    }
+}
+```
+
+步骤二：then 方法链式调用
+then方法接受两个参数，成功回调跟失败回调。
+```
+then(onFulFilled,onRejected){
+    if(this.status === 'resolved'){
+        this.onFulFilled(this.value)
+    }
+    if(this.status === 'rejected'){
+        onRejected(this.reason)
+    }
+}
+```
+
+如果在pending 状态可以把 成功的回调结果或者失败的回调结果放入数组中,多次调用then 的异步函数需要放在数组里面然后执行。
+```
+then(onFulFilled,onRejected){
+    if(this.status === 'resolved'){
+        onFulFilled(this.value)
+    }
+    if(this.status === 'rejected'){
+        onRejected(this.reason)
+    }
+
+    if(this.status === 'pending'){
+        this.onFulFilledCallbacks.push(() => {
+            onFulFilled(this.value)
+        })
+
+        this.onRejectedCallbacks.push(() => {
+            onRejected(this.reason)
+        })
+    }
+}
+
+```
+
