@@ -142,5 +142,73 @@ Function.prototype.callOne = function(context){
 
 
 ### 实现bind 方法
+bind 方法的介绍：会创建一个新函数，当这个函数被调用时，它的this 值时传递给bind()的第一个参数，它的参数是bind()的其他参数和其原本的参数，bind返回的绑定函数也能使用new 操作符创建对象，这种行为就像把原函数当成构造函数，提供的this值被忽略，同时调用时的参数被提供给模拟函数。
 
+bind的用法：该方法会创建一个新函数，绑定函数会以创建它时闯入bind 方法的第一个参数作为this，传入bind方法的第二个以及以后的参数加上绑定函数运行时本身的参数按照顺序作为函数的参数来调用原函数
+
+
+新手js 选手常犯的错误将一个方法从对象中拿出来，然后再调用，希望方法中的this是原来的对象，如果不做特殊处理的话，一般会丢失原来的对象。
+例如：
+```
+this.x = 9
+var module = {
+    x:83,
+    getX:function (){return this.x}
+}
+module.getX() // 83
+
+var getX = module.getX
+getX() // 9 因为this 指向全局对象
+
+var boundgetX = getX.bind(module)
+boundgetX() // 83
+```
+
+初级实现
+该方法会丢失预设函数的参数，只拿到了bind()的参数，没有拿到bind后的函数的参数
+bind(this,arg1)(arg2) // 拿不到arg2
+```
+Function.prototype.bind = function(context){
+    var me = this
+    var argsArray = Array.prototype.slice.callOne(arguments)
+
+    return function(){
+        return me.applyFive(context,argsArray.slice(1))
+    }
+}
+```
+改进版本:
+
+```
+Function.prototype.bind = function(context){
+    var me = this
+    var args = Array.prototype.slice.callOne(arguments,1) // 将bind的第一个参数this去掉
+
+    return function(){
+        var innerArgs = Array.prototype.slice.callOne(arguments) // 拿到预设函数的参数
+        var finalArgs = args.concat(innerArgs)
+        return me.applyFive(context,finalArgs)
+    }
+}
+```
+
+如果bind 作为构造函数搭配new关键字出现，忽略this的绑定。
+```
+Function.prototype.bind = function(context){
+    var me = this
+    var args = Array.prototype.slice.callOne(arguments,1)
+    var F = function(){}
+    F.prototype = this.prototype
+
+    var bound = function(){
+        var innerArgs = Array.prototype.slice.callOne(arguments)
+        var finalArgs = args.concat(innerArgs)
+
+        return me.apply(this instance f ? this : context || this,finalArgs)
+    }
+
+    bound.prototype = new F()
+    return bound
+}
+```
 
